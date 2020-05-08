@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Link} from "react-router-dom";
 
+import Header from './Header';
 import Login from './login';
 import Search from './artist/search';
 import Browse from './artist/browse';
@@ -8,6 +9,7 @@ import Browse from './artist/browse';
 const App = () => {
     return (
         <div>
+            <Header/>
             <BrowserRouter>
             <div>
             <Route path="/" exact component={Login}/>
