@@ -6,7 +6,13 @@ import './login.css';
 const Login = () => {
     return (
         <div>
-            <h1>Login Page</h1>
+            <div className="container"> 
+               <button type="submit" id="login--btn"  
+                className="btn btn-outline-dark btn-lg d-flex justify-content-center">
+                Login 
+                <img className="logo" src={require('../spotify.png')} />
+               </button>
+            </div>      
         </div>
     );
 };
