@@ -1,8 +1,9 @@
 import React from "react";
-import { BrowserRouter, Route, Link} from "react-router-dom";
+import { BrowserRouter, Route} from "react-router-dom";
+
 
 import Header from './Header';
-import Login from './login';
+import Home from './Home';
 import Search from './artist/search';
 import Browse from './artist/browse';
 
@@ -12,7 +13,7 @@ const App = () => {
             <Header/>
             <BrowserRouter>
             <div>
-            <Route path="/" exact component={Login}/>
+            <Route path="/" exact component={Home}/>
             <Route path="/artist/:id" exact component={Browse}/>    
             <Route path="/search" exact component={Search}/>              
             </div>
