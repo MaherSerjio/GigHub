@@ -1,10 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route} from "react-router-dom";
 
-
 import Header from './Header';
 import Home from './Home';
-import Search from './artist/search';
+import Artist from './artist/artist';
 import Browse from './artist/browse';
 
 const App = () => {
@@ -15,7 +14,7 @@ const App = () => {
             <div>
             <Route path="/" exact component={Home}/>
             <Route path="/artist/:id" exact component={Browse}/>    
-            <Route path="/search" exact component={Search}/>              
+            <Route path="/artist" exact component={Artist}/>              
             </div>
             </BrowserRouter>
         </div>

@@ -1,7 +1,5 @@
 import React from "react";
 
-import './search.css';
-import '../styles/media.css';
 
 const Search = () => {
     return (
@@ -26,8 +24,6 @@ const Search = () => {
                     </div>
                </div>     
             </div> 
-
-
         </div>
     );
 };
