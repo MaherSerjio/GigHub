@@ -1,0 +1,40 @@
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login--btn {
+    position: relative;
+    width: 100%;
+} 
+
+.btn--logo {
+    position: absolute;
+    right: 5.5%;
+    top: 15%; 
+    width: 2rem;  
+}
+
+@media (max-width: 1000px) { 
+    .btn--logo {
+        right: 7.5%;
+    }
+}
+
+@media (max-width: 760px) { 
+    .btn--logo {
+        right: 8.5%;
+    }
+}
+@media (max-width: 670px) { 
+    .btn--logo {
+        right: 9.5%;
+    }
+}
+@media (max-width: 575px) { 
+    .btn--logo {
+        right: 6.5%;
+    }
+}

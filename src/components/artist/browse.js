@@ -1,6 +1,6 @@
 import React from "react";
 
-import './browse.css';
+import '../styles/browse.css';
 
 
 class Browse extends React.Component {

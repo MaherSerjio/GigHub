@@ -1,15 +1,13 @@
 import React from "react";
-import SpotifyLoginBtn from './Shared/SpotifyLoginBtn';
+import Login from './Shared/Login';
 
-
-import './Home.css';
 
 const Home = () => {
     return (
         <div>
-            <SpotifyLoginBtn/>
+            <Login />
         </div>
     );
 };
- 
+
 export default Home;
