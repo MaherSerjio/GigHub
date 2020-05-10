@@ -1,12 +1,13 @@
 import React from 'react';
 
-const Spinner = () => {
+const Spinner = (props) => {
     return (
         <div className="text-center">
-            <span className="sr-only ">Loading...</span>
             <div className="spinner-grow" role="status">
             </div>
+            <h2 className="py-5">{props.message}</h2>
         </div>
+
     );
 };
 

@@ -30,7 +30,7 @@ class Login extends React.Component {
     render() {
         // if login succeds navigate to search /artist
         // if err show err toaster 
-        if (this.state.isLoading) return <Spinner />;
+        if (this.state.isLoading) return <Spinner message="Please login to your spotify account" />;
         return (
             <div className="login">
                 <div className="col-sm-4 ">
