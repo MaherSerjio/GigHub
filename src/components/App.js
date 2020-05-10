@@ -1,24 +1,27 @@
 import React from "react";
-import { BrowserRouter, Route} from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 
 import Header from './Header';
 import Home from './Home';
 import Artist from './artist/artist';
 import Browse from './artist/browse';
 
-const App = () => {
-    return (
-        <div>
-            <Header/>
-            <BrowserRouter>
+class App extends React.Component {
+    render() {
+        return (
             <div>
-            <Route path="/" exact component={Home}/>
-            <Route path="/artist/:id" exact component={Browse}/>    
-            <Route path="/artist" exact component={Artist}/>              
-            </div>
-            </BrowserRouter>
-        </div>
-    );
+                <Header />
+                <BrowserRouter>
+                    <div>
+                        <Route path="/" exact component={Home} />
+                        <Route path="/artist/:id" exact component={Browse} />
+                        <Route path="/artist" exact component={Artist} />
+                    </div>
+                </BrowserRouter>
+            </div >
+        )
+    }
+
 };
- 
+
 export default App;
