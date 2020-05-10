@@ -3,8 +3,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 import Header from './Header';
 import Home from './Home';
-import Artist from './artist/artist';
-import Browse from './artist/browse';
+import Artist from './artist/Artist';
+import Browse from './artist/Browse';
 
 class App extends React.Component {
     render() {
