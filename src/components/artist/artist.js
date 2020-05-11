@@ -1,7 +1,7 @@
 import React from "react";
 
 import Search from "../Shared/Search";
-import Card from "../Shared/Card";
+import ArtistCard from "../Shared/ArtistCard";
 import '../styles/artist.css';
 
 class Artist extends React.Component {
@@ -32,16 +32,16 @@ class Artist extends React.Component {
                     <div className="container">
                         <div className="row">
                             <div className="col">
-                                <Card authorName="Author 1" numberOfFollowers="1,000" />
+                                <ArtistCard authorName="Author 1" numberOfFollowers="1,000" />
                             </div>
                             <div className="col">
-                                <Card authorName="Author 2" numberOfFollowers="500" />
+                                <ArtistCard authorName="Author 2" numberOfFollowers="500" />
                             </div>
                             <div className="col">
-                                <Card authorName="Author 3" numberOfFollowers="1,000" />
+                                <ArtistCard authorName="Author 3" numberOfFollowers="1,000" />
                             </div>
                             <div className="col">
-                                <Card authorName="Author 4" numberOfFollowers="100" />
+                                <ArtistCard authorName="Author 4" numberOfFollowers="100" />
                             </div>
                         </div>
                     </div>

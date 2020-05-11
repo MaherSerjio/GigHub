@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Card = (props) => {
+const ArtistCard = (props) => {
     return (
-        <div className="card" style={{ width: "14rem" }}>
+        <div className="card text-white bg-dark mb-5" style={{ width: "14rem" }}>
             <img className="card-img-top" src={require('../../spotify.png')} alt="Card image cap"></img>
             <div className="card-body">
                 <h5 className="card-title">{props.authorName}</h5>
@@ -16,5 +16,5 @@ const Card = (props) => {
     );
 };
 
-export default Card;
+export default ArtistCard;
 
