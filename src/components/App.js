@@ -6,7 +6,7 @@ import Header from './Header';
 import Home from './Home';
 import Artist from './artist/Artist';
 import ArtistDetails from './artist/ArtistDetails';
-import ArtistAlbums from './artist/ArtistAlbums';
+
 
 class App extends React.Component {
     render() {
@@ -17,7 +17,7 @@ class App extends React.Component {
                     <div>
                         <Route path="/" exact component={Home} />
                         <Route path="/artist" exact component={Artist} />
-                        <Route path="/artist/:id" exact component={ArtistAlbums} />
+                        <Route path="/artist/:id" exact component={Artist} />
                         <Route path="/artist/:id/details" exact component={ArtistDetails} />
                     </div>
                 </Router>

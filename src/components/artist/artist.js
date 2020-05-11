@@ -1,6 +1,7 @@
 import React from "react";
 
-import ArtistAlbums from "./ArtistAlbums";
+import Search from "../Shared/Search";
+import Card from "../Shared/Card";
 import '../styles/artist.css';
 
 class Artist extends React.Component {
@@ -23,26 +24,32 @@ class Artist extends React.Component {
 
     renderBody() {
         if (this.SubmitedQuery())
-            return <ArtistAlbums />
-
-        return (
-            <div className="artist">
-                <div className="col-sm-6 ">
-                    <div className="input-group" >
-                        <input
-                            className="form-control py-2 border-right-0 border"
-                            type="search"
-                            placeholder="Search for an artist…" >
-                        </input>
-                        <span className="input-group-append">
-                            <button
-                                className="btn btn-outline-secondary border-left-0 border"
-                                type="button">
-                                <i className="fa fa-search"></i>
-                            </button>
-                        </span>
+            return (
+                <div className="artist">
+                    <div className=" d-flex justify-content-center py-5">
+                        <Search />
                     </div>
-                </div>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col">
+                                <Card authorName="Author 1" numberOfFollowers="1,000" />
+                            </div>
+                            <div className="col">
+                                <Card authorName="Author 2" numberOfFollowers="500" />
+                            </div>
+                            <div className="col">
+                                <Card authorName="Author 3" numberOfFollowers="1,000" />
+                            </div>
+                            <div className="col">
+                                <Card authorName="Author 4" numberOfFollowers="100" />
+                            </div>
+                        </div>
+                    </div>
+                </div >
+            );
+        return (
+            <div className="search--input d-flex justify-content-center align-items-center">
+                <Search />
             </div >
         );
     };
