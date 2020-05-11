@@ -1,36 +1,43 @@
-import React from "react";
+import React from 'react';
 import SpotifyLogin from 'react-spotify-login';
+import history from '../../history';
+
 import { clientId, redirectUri } from './settings';
-import Spinner from '../Shared/Spinner';
+import Spinner from './Spinner';
+import Error from './Error'
 import '../styles/login.css';
 
+
 class Login extends React.Component {
-    state = { token: null, errorMessage: "", isLoading: false };
+    state = { token: null, errorMessage: null, isLoading: null };
+
+    render() {
+        return <div>
+            {this.renderBody()}
+        </div>
+    };
+
+    Clicked = () => this.setState({ isLoading: true });
 
     onSuccess = (response) => {
         console.log(response);
         this.setState({ isLoading: false });
         this.setState({ token: response.access_token });
-        // Redirect user to search route
+        history.push('/artist');
     };
 
     onFailure = (response) => {
         console.log(response);
         this.setState({ isLoading: false });
-        // this.setState({ errorMessage: "" }); Sign in
-        // notifaction of error response 
+        this.setState({ errorMessage: response });
     };
 
-    Clicked = () => this.setState({ isLoading: true });
 
-    componentDidUpdate() {
-        console.log(this.state);
-    }
-
-    render() {
-        // if login succeds navigate to search /artist
-        // if err show err toaster 
-        if (this.state.isLoading) return <Spinner message="Please login to your spotify account" />;
+    renderBody() {
+        if (this.state.errorMessage)
+            return <Error message={this.state.errorMessage} />;
+        if (this.state.isLoading)
+            return <Spinner message="Please login to your spotify account" />;
         return (
             <div className="login">
                 <div className="col-sm-4 ">
@@ -47,7 +54,7 @@ class Login extends React.Component {
                 </div>
             </div>
         );
-    };
+    }
 }
 
 export default Login;

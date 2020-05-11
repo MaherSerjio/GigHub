@@ -1,23 +1,26 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
+import history from '../history';
 
 import Header from './Header';
 import Home from './Home';
 import Artist from './artist/Artist';
-import Browse from './artist/Browse';
+import ArtistDetails from './artist/ArtistDetails';
+import ArtistAlbums from './artist/ArtistAlbums';
 
 class App extends React.Component {
     render() {
         return (
             <div>
                 <Header />
-                <BrowserRouter>
+                <Router history={history}>
                     <div>
                         <Route path="/" exact component={Home} />
-                        <Route path="/artist/:id" exact component={Browse} />
                         <Route path="/artist" exact component={Artist} />
+                        <Route path="/artist/:id" exact component={ArtistAlbums} />
+                        <Route path="/artist/:id/details" exact component={ArtistDetails} />
                     </div>
-                </BrowserRouter>
+                </Router>
             </div >
         )
     }
