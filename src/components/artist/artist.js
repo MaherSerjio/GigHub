@@ -1,6 +1,6 @@
 import React from "react";
 
-import Search from "../Shared/Search";
+import SearchBar from "../Shared/SearchBar";
 import ArtistCard from "../Shared/ArtistCard";
 import '../styles/artist.css';
 
@@ -27,7 +27,7 @@ class Artist extends React.Component {
             return (
                 <div className="artist">
                     <div className=" d-flex justify-content-center py-5">
-                        <Search />
+                        <SearchBar />
                     </div>
                     <div className="container">
                         <div className="row">
@@ -48,8 +48,8 @@ class Artist extends React.Component {
                 </div >
             );
         return (
-            <div className="search--input d-flex justify-content-center align-items-center">
-                <Search />
+            <div className="search--bar d-flex justify-content-center align-items-center">
+                <SearchBar />
             </div >
         );
     };

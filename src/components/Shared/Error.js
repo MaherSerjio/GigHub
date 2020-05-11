@@ -2,9 +2,9 @@ import React from 'react';
 
 const Error = (props) => {
     return (
-        <div className="alert alert-success" role="alert">
-            <h4 className="alert-heading">Error</h4>
-            <p>{props.message}</p>
+        <div className="text-center py-4 bg-danger text-white" role="alert">
+            <h4 className="alert-heading">{props.message.message}</h4>
+            <p>Try again later :(</p>
         </div>
     );
 };
