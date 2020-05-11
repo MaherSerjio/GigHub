@@ -11,7 +11,7 @@ import ArtistDetails from './artist/ArtistDetails';
 class App extends React.Component {
     render() {
         return (
-            <div>
+            <div className="App">
                 <Header />
                 <Router history={history}>
                     <div>

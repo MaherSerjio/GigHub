@@ -2,9 +2,18 @@ import React from "react";
 
 import SearchBar from "../Shared/SearchBar";
 import ArtistCard from "../Shared/ArtistCard";
+import Error from '../Shared/Error'
 import '../styles/artist.css';
 
 class Artist extends React.Component {
+    token = localStorage.getItem("token");
+
+    // We have Token and search Term Call api and get response 
+    //const  token = localStorage.getItem("token") !== null ? token : null;
+
+    onSearchSubmit(term) {
+        console.log(term);
+    }
 
     render() {
         return <div>
@@ -23,11 +32,14 @@ class Artist extends React.Component {
     }
 
     renderBody() {
+        if (this.token == null) {
+            return <Error message="Login To your Spotify Account" />
+        }
         if (this.SubmitedQuery())
             return (
                 <div className="artist">
                     <div className=" d-flex justify-content-center py-5">
-                        <SearchBar />
+                        <SearchBar onSubmit={this.onSearchSubmit} />
                     </div>
                     <div className="container">
                         <div className="row">
@@ -49,7 +61,7 @@ class Artist extends React.Component {
             );
         return (
             <div className="search--bar d-flex justify-content-center align-items-center">
-                <SearchBar />
+                <SearchBar onSubmit={this.onSearchSubmit} />
             </div >
         );
     };

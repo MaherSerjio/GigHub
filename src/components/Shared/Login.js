@@ -9,7 +9,7 @@ import '../styles/login.css';
 
 
 class Login extends React.Component {
-    state = { token: null, errorMessage: null, isLoading: null };
+    state = { errorMessage: null, isLoading: null };
 
     render() {
         return <div>
@@ -22,7 +22,7 @@ class Login extends React.Component {
     onSuccess = (response) => {
         console.log(response);
         this.setState({ isLoading: false });
-        this.setState({ token: response.access_token });
+        localStorage.setItem("token", response.access_token);
         history.push('/artist');
     };
 
