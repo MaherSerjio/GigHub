@@ -1,10 +1,7 @@
 #root {
-    height: 80rem;
+    height: max-content;
     background: #ADA996; 
     background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); 
     background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); 
-}
-a {
-    text-decoration: none;
 }
 

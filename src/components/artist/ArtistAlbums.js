@@ -1,12 +1,32 @@
 import React from "react";
+import axios from 'axios';
 
 import '../styles/artistDetails.css';
 import AlbumCard from "../Shared/AlbumCard";
 
-class ArtistDetails extends React.Component {
+class ArtistAlbums extends React.Component {
+    state = { artistAlbums: null };
+
+    token = localStorage.getItem("token");
+    artistId = localStorage.getItem("artistId");
+
+    GetArtistAlbums = async (term) => {
+        if (this.token != null) {
+            const response = await axios.get('https://api.spotify.com/v1/artists/' + this.artistId + '/albums', {
+                headers: {
+                    Authorization: "Bearer " + this.token,
+                    Accept: "application/json"
+                }
+            });
+            //    this.setState({ albums: response.data.artists.items });
+            console.log(response);
+        }
+    };
+
+
     render() {
         return (
-            <div className="artistDetails">
+            <div className="artistAlbums">
                 <div className="container  py-5">
                     <h2>Artist Name</h2>
                     <p>Albums</p>
@@ -34,4 +54,4 @@ class ArtistDetails extends React.Component {
     };
 }
 
-export default ArtistDetails;
+export default ArtistAlbums;

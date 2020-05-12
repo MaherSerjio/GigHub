@@ -5,7 +5,7 @@ import history from '../history';
 import Header from './Header';
 import Home from './Home';
 import Artist from './artist/Artist';
-import ArtistDetails from './artist/ArtistDetails';
+import ArtistAlbums from './artist/ArtistAlbums';
 
 
 class App extends React.Component {
@@ -17,7 +17,7 @@ class App extends React.Component {
                     <div>
                         <Route path="/" exact component={Home} />
                         <Route path="/artist" exact component={Artist} />
-                        <Route path="/artist/:id/details" exact component={ArtistDetails} />
+                        <Route path="/artist/:id/albums" exact component={ArtistAlbums} />
                     </div>
                 </Router>
             </div >

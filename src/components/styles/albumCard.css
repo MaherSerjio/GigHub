@@ -3,3 +3,7 @@
     height: 20vw;
     object-fit: cover;
 }
+
+a:link{
+    text-decoration: none!important;
+  }
