@@ -20,16 +20,14 @@ class Login extends React.Component {
     Clicked = () => this.setState({ isLoading: true });
 
     onSuccess = (response) => {
-        console.log(response);
         this.setState({ isLoading: false });
         localStorage.setItem("token", response.access_token);
         history.push('/artist');
     };
 
     onFailure = (response) => {
-        console.log(response);
         this.setState({ isLoading: false });
-        this.setState({ errorMessage: response });
+        this.setState({ errorMessage: response.message });
     };
 
 

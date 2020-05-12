@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 
 import SearchBar from "../Shared/SearchBar";
 import ArtistCard from "../Shared/ArtistCard";
@@ -6,13 +7,30 @@ import Error from '../Shared/Error'
 import '../styles/artist.css';
 
 class Artist extends React.Component {
+    state = { artists: null };
     token = localStorage.getItem("token");
 
-    // We have Token and search Term Call api and get response 
-    //const  token = localStorage.getItem("token") !== null ? token : null;
+    onSearchSubmit = async (term) => {
+        if (this.token != null) {
+            const response = await axios.get("https://api.spotify.com/v1/search", {
+                params: {
+                    query: term,
+                    type: "artist",
+                    market: "US",
+                    offset: "0",
+                    limit: "8"
 
-    onSearchSubmit(term) {
-        console.log(term);
+                },
+                headers: {
+                    Authorization: "Bearer " + this.token,
+                    Accept: "application/json"
+                }
+            });
+            this.setState({ artists: response.data.artists.items });
+
+        }
+
+        // else token is null
     }
 
     render() {
@@ -21,21 +39,13 @@ class Artist extends React.Component {
         </div>
     };
 
-    SubmitedQuery() {
-        const url = window.location.href;
-        if ((url.split('artist').splice(1)[0] === '/')
-            || (url.split('artist').splice(1)[0] === '')) {
-            console.log(url.split('artist').splice(1)[0]);
-            return false
-        }
-        else return true;
-    }
-
     renderBody() {
+
         if (this.token == null) {
-            return <Error message="Login To your Spotify Account" />
+            return <Error message="Please Login To your Spotify Account" />
         }
-        if (this.SubmitedQuery())
+        if (this.state.artists) {
+            console.log(this.state, 'State here');
             return (
                 <div className="artist">
                     <div className=" d-flex justify-content-center py-5">
@@ -43,22 +53,16 @@ class Artist extends React.Component {
                     </div>
                     <div className="container">
                         <div className="row">
-                            <div className="col">
-                                <ArtistCard authorName="Author 1" numberOfFollowers="1,000" />
-                            </div>
-                            <div className="col">
-                                <ArtistCard authorName="Author 2" numberOfFollowers="500" />
-                            </div>
-                            <div className="col">
-                                <ArtistCard authorName="Author 3" numberOfFollowers="1,000" />
-                            </div>
-                            <div className="col">
-                                <ArtistCard authorName="Author 4" numberOfFollowers="100" />
-                            </div>
+                            {this.state.artists.map(artist =>
+                                <div className="col" >
+                                    <ArtistCard images={artist.images} authorName={artist.name} numberOfFollowers={artist.followers.total} />
+                                </div>)
+                            }
                         </div>
                     </div>
                 </div >
             );
+        }
         return (
             <div className="search--bar d-flex justify-content-center align-items-center">
                 <SearchBar onSubmit={this.onSearchSubmit} />
