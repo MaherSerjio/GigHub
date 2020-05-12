@@ -2,15 +2,19 @@ import React from "react";
 import axios from 'axios';
 
 import '../styles/artistDetails.css';
+
+import Spinner from "../Shared/Spinner";
 import AlbumCard from "../Shared/AlbumCard";
 
 class ArtistAlbums extends React.Component {
     state = { artistAlbums: null };
+    IsDataFetched = false;
 
     token = localStorage.getItem("token");
     artistId = localStorage.getItem("artistId");
 
-    GetArtistAlbums = async (term) => {
+
+    GetArtistAlbums = async () => {
         if (this.token != null) {
             const response = await axios.get('https://api.spotify.com/v1/artists/' + this.artistId + '/albums', {
                 headers: {
@@ -18,13 +22,24 @@ class ArtistAlbums extends React.Component {
                     Accept: "application/json"
                 }
             });
-            //    this.setState({ albums: response.data.artists.items });
-            console.log(response);
+            this.setState({ artistAlbums: response.data.items });
         }
     };
 
-
     render() {
+        console.log(this.state.artistAlbums);
+        return <div>
+            {this.renderBody()}
+        </div>
+    };
+
+    renderBody() {
+        if (!this.IsDataFetched) {
+            this.GetArtistAlbums();
+            this.IsDataFetched = true;
+            return <Spinner message="Please login to your spotify account" />;
+        }
+
         return (
             <div className="artistAlbums">
                 <div className="container  py-5">
@@ -33,18 +48,19 @@ class ArtistAlbums extends React.Component {
                 </div>
                 <div className="container">
                     <div className="row ">
-                        <div className="col">
-                            <AlbumCard albumName="Album 1" authorName="Author 1" albumRealeaseDate="2018-09-28" numberOfTracks="63" />
-                        </div>
-                        <div className="col">
-                            <AlbumCard albumName="Album 2" authorName="Author 2" albumRealeaseDate="2016-09-02" numberOfTracks="32" />
-                        </div>
-                        <div className="col">
-                            <AlbumCard albumName="Album 3" authorName="Author 3" albumRealeaseDate="2011-09-12" numberOfTracks="12" />
-                        </div>
-                        <div className="col">
-                            <AlbumCard albumName="Album 4" authorName="Author 4" albumRealeaseDate="2004-09-08" numberOfTracks="30" />
-                        </div>
+                        {
+                            this.state.artistAlbums.map(album =>
+                                <div className="col" >
+                                    <AlbumCard
+                                        albumName={album.name}
+                                        authorName={album.artists[0].name}
+                                        albumRealeaseDate={album.release_date}
+                                        numberOfTracks={album.total_tracks}
+                                    />
+                                </div>)
+
+                        }
+
                     </div>
 
                 </div>

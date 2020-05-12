@@ -43,10 +43,10 @@ const getStars = (popularity) => {
 
 const GetNumberOfFollowers = (followers) => {
     let numberOfFollowers = followers;
+
     if (followers === null) {
         numberOfFollowers = '0';
     }
-
     return numberOfFollowers;
 };
 
@@ -58,8 +58,6 @@ const GetImageUrl = (images) => {
         ImagesUrls = images[0];
         if (typeof ImagesUrls !== 'undefined') {
             ImageUrl = ImagesUrls.url;
-        } else {
-            ImageUrl = "";
         }
     } else {
         ImageUrl = "";
