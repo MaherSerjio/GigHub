@@ -7,7 +7,6 @@ const AlbumCard = (props) => {
     const imageUrl = GetImageUrl(props.images);
     const previewUrl = props.previewUrls.spotify;
 
-
     return (
         <div className="card text-white bg-dark mb-5" style={{ width: "14rem" }}>
             <img className="card-img-top img-responsive" src={imageUrl} alt="Card  cap"></img>

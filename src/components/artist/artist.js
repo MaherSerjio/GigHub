@@ -14,8 +14,9 @@ class Artist extends React.Component {
     token = localStorage.getItem("token");
     term = localStorage.getItem("term");
 
-    goToArtistAlbums = (artistId) => {
+    goToArtistAlbums = (artistId, artistName) => {
         localStorage.setItem("artistId", artistId);
+        localStorage.setItem("artistName", artistName);
         history.push("/artist/" + artistId + "/albums");
     }
 
@@ -66,8 +67,6 @@ class Artist extends React.Component {
     }
 
     renderBody() {
-
-
         if (this.token == null) {
             return <Error message="Please Login To your Spotify Account" />
         }
@@ -87,7 +86,7 @@ class Artist extends React.Component {
                         <div className="row">
                             {
                                 this.state.artists.map(artist =>
-                                    <div onClick={() => this.goToArtistAlbums(artist.id)} className="col" >
+                                    <div onClick={() => this.goToArtistAlbums(artist.id, artist.name)} className="col" >
                                         <ArtistCard
                                             popularity={artist.popularity}
                                             images={artist.images}

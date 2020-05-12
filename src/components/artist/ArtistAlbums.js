@@ -13,7 +13,7 @@ class ArtistAlbums extends React.Component {
 
     token = localStorage.getItem("token");
     artistId = localStorage.getItem("artistId");
-
+    artistName = localStorage.getItem("artistName");
 
     GetArtistAlbums = async () => {
         if (this.token != null) {
@@ -51,7 +51,7 @@ class ArtistAlbums extends React.Component {
         return (
             <div className="artistAlbums">
                 <div className="container  py-5">
-                    <h2>Artist Name</h2>
+                    <h2>{this.artistName}</h2>
                     <p>Albums</p>
                 </div>
                 <div className="container">
@@ -68,13 +68,9 @@ class ArtistAlbums extends React.Component {
                                         numberOfTracks={album.total_tracks}
                                     />
                                 </div>)
-
                         }
-
                     </div>
-
                 </div>
-
             </div>
         );
     };
