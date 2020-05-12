@@ -55,7 +55,7 @@ class Artist extends React.Component {
                         <div className="row">
                             {this.state.artists.map(artist =>
                                 <div className="col" >
-                                    <ArtistCard images={artist.images} authorName={artist.name} numberOfFollowers={artist.followers.total} />
+                                    <ArtistCard popularity={artist.popularity} images={artist.images} authorName={artist.name} numberOfFollowers={artist.followers.total} />
                                 </div>)
                             }
                         </div>
