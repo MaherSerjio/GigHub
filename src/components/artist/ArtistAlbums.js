@@ -60,6 +60,8 @@ class ArtistAlbums extends React.Component {
                             this.state.artistAlbums.map(album =>
                                 <div className="col" >
                                     <AlbumCard
+                                        previewUrls={album.external_urls}
+                                        images={album.images}
                                         albumName={album.name}
                                         authorName={album.artists[0].name}
                                         albumRealeaseDate={album.release_date}
