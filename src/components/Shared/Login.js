@@ -36,7 +36,7 @@ class Login extends React.Component {
             return <Error message={this.state.errorMessage} />;
         }
         if (this.state.isLoading)
-            return <Spinner message="Please login to your spotify account" />;
+            return <Spinner message="Please wait until we log you in" />;
         return (
             <div className="login">
                 <div className="col-sm-4 ">

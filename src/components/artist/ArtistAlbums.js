@@ -3,7 +3,8 @@ import axios from 'axios';
 
 import '../styles/artistDetails.css';
 
-import Spinner from "../Shared/Spinner";
+import Spinner from '../Shared/Spinner';
+import Error from '../Shared/Error'
 import AlbumCard from "../Shared/AlbumCard";
 
 class ArtistAlbums extends React.Component {
@@ -17,6 +18,10 @@ class ArtistAlbums extends React.Component {
     GetArtistAlbums = async () => {
         if (this.token != null) {
             const response = await axios.get('https://api.spotify.com/v1/artists/' + this.artistId + '/albums', {
+                params: {
+                    offset: "0",
+                    limit: "8"
+                },
                 headers: {
                     Authorization: "Bearer " + this.token,
                     Accept: "application/json"
@@ -34,10 +39,13 @@ class ArtistAlbums extends React.Component {
     };
 
     renderBody() {
+        if (this.token == null) {
+            return <Error message="Please Login To your Spotify Account" />
+        }
         if (!this.IsDataFetched) {
             this.GetArtistAlbums();
             this.IsDataFetched = true;
-            return <Spinner message="Please login to your spotify account" />;
+            return <Spinner message="Fetching your data ..." />;
         }
 
         return (
