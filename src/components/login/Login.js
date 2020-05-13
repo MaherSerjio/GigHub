@@ -1,9 +1,9 @@
 import React from 'react';
 
 import SpotifyLogin from 'react-spotify-login';
-import history from '../../history';
+import history from '../configuration/history';
 
-import { clientId, redirectUri } from '../Shared/settings';
+import { clientId, redirectUri } from '../configuration/settings';
 import Spinner from '../Shared/Spinner';
 import Error from '../Shared/Error'
 import '../styles/login.css';
