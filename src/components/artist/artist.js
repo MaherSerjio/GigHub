@@ -36,13 +36,11 @@ class Artist extends React.Component {
     }
 
     GetSearchResult = async (term) => {
-
         // Add Pagination to improve UX 
 
         if (this.token != null) {
-
             this.setState({ isLoading: true });
-            await axios.get("https://api.spotify.com/v1/search", {
+            const response = await axios.get("https://api.spotify.com/v1/search", {
                 params: {
                     query: term,
                     type: "artist",
@@ -54,10 +52,11 @@ class Artist extends React.Component {
                     Authorization: "Bearer " + this.token,
                     Accept: "application/json"
                 }
-            }).then((response) => {
-                this.setState({ isLoading: false });
-                this.setState({ artists: response.data.artists.items });
             })
+                .then((response) => {
+                    this.setState({ isLoading: false });
+                    this.setState({ artists: response.data.artists.items });
+                })
                 .catch((err) => {
                     this.setState({ isLoading: false });
                     this.setState({ errorMessage: err.message });
@@ -77,6 +76,15 @@ class Artist extends React.Component {
             return <Spinner message="Fetching your data ..." />;
 
         if (this.state.artists) {
+            const artistsCards = this.state.artists
+                .map(({ id, name, popularity, images, followers }) =>
+                    <div onClick={() => this.goToArtistAlbums(id, name)} className="col" >
+                        <ArtistCard
+                            popularity={popularity}
+                            images={images}
+                            authorName={name}
+                            numberOfFollowers={followers.total} />
+                    </div>);
             return (
                 <div className="artist">
                     <div className=" d-flex justify-content-center py-5">
@@ -84,16 +92,7 @@ class Artist extends React.Component {
                     </div>
                     <div className="container">
                         <div className="row">
-                            {
-                                this.state.artists.map(artist =>
-                                    <div onClick={() => this.goToArtistAlbums(artist.id, artist.name)} className="col" >
-                                        <ArtistCard
-                                            popularity={artist.popularity}
-                                            images={artist.images}
-                                            authorName={artist.name}
-                                            numberOfFollowers={artist.followers.total} />
-                                    </div>)
-                            }
+                            {artistsCards}
                         </div>
                     </div>
                 </div >

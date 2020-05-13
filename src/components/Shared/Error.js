@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Error = (props) => {
+const Error = ({ message }) => {
     return (
         <div className="text-center py-4 bg-danger text-white" role="alert">
-            <h4 className="alert-heading">{props.message}</h4>
+            <h4 className="alert-heading">{message}</h4>
         </div>
     );
 };

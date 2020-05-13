@@ -24,7 +24,7 @@ class ArtistAlbums extends React.Component {
 
     GetArtistAlbums = async () => {
         if (this.token != null) {
-            await axios.get('https://api.spotify.com/v1/artists/' + this.artistId + '/albums', {
+            const response = await axios.get('https://api.spotify.com/v1/artists/' + this.artistId + '/albums', {
                 params: {
                     offset: "0",
                     limit: "20"
@@ -33,11 +33,11 @@ class ArtistAlbums extends React.Component {
                     Authorization: "Bearer " + this.token,
                     Accept: "application/json"
                 }
-            }).then((response) => { this.setState({ artistAlbums: response.data.items }); })
+            })
+                .then((response) => { this.setState({ artistAlbums: response.data.items }); })
                 .catch((err) => { this.setState({ erroMessage: err.message }) });
         }
     };
-
 
 
     renderBody() {
@@ -54,32 +54,36 @@ class ArtistAlbums extends React.Component {
             return <Spinner message="Fetching your data ..." />;
         }
 
-        return (
-            <div className="artistAlbums">
-                <div className="container  py-5">
-                    <h2>{this.artistName}</h2>
-                    <p>Albums</p>
-                </div>
-                <div className="container">
-                    <div className="row ">
-                        {
-                            this.state.artistAlbums.map(album =>
-                                <div className="col" >
-                                    <AlbumCard
-                                        previewUrls={album.external_urls}
-                                        images={album.images}
-                                        albumName={album.name}
-                                        authorName={album.artists[0].name}
-                                        albumRealeaseDate={album.release_date}
-                                        numberOfTracks={album.total_tracks}
-                                    />
-                                </div>)
-                        }
+        if (this.state.artistAlbums) {
+            const artistAlbums = this.state.artistAlbums
+                .map(({ external_urls, images, name, release_date, total_tracks, artists }) =>
+                    <div className="col" >
+                        <AlbumCard
+                            previewUrls={external_urls}
+                            images={images}
+                            albumName={name}
+                            authorName={artists[0].name}
+                            albumRealeaseDate={release_date}
+                            numberOfTracks={total_tracks}
+                        />
+                    </div>)
+
+            return (
+                <div className="artistAlbums">
+                    <div className="container  py-5">
+                        <h2>{this.artistName}</h2>
+                        <p>Albums</p>
+                    </div>
+                    <div className="container">
+                        <div className="row ">
+                            {artistAlbums}
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
-    };
+            );
+        };
+    }
+
 }
 
 export default ArtistAlbums;

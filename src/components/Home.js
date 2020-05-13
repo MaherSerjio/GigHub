@@ -1,5 +1,5 @@
 import React from "react";
-import Login from './Shared/Login';
+import Login from './login/Login';
 
 import './styles/home.css';
 
