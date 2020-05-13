@@ -42,6 +42,10 @@ class ArtistAlbums extends React.Component {
     };
 
     renderBody() {
+        if (this.state.erroMessage) {
+            return <Error message={this.state.erroMessage} />
+        }
+
         if (this.token == null) {
             return <Error message="Please Login To your Spotify Account" />
         }
