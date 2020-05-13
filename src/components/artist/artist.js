@@ -39,6 +39,8 @@ class Artist extends React.Component {
 
     GetSearchResult = async (term) => {
 
+        // Add Pagination to improve UX 
+
         if (this.token != null) {
 
             this.setState({ isLoading: true });
@@ -48,7 +50,7 @@ class Artist extends React.Component {
                     type: "artist",
                     market: "US",
                     offset: "0",
-                    limit: "8"
+                    limit: "20"
                 },
                 headers: {
                     Authorization: "Bearer " + this.token,

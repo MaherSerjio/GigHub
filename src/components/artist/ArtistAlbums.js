@@ -15,12 +15,14 @@ class ArtistAlbums extends React.Component {
     artistId = localStorage.getItem("artistId");
     artistName = localStorage.getItem("artistName");
 
+    // Add Pagination to improve UX 
+
     GetArtistAlbums = async () => {
         if (this.token != null) {
             const response = await axios.get('https://api.spotify.com/v1/artists/' + this.artistId + '/albums', {
                 params: {
                     offset: "0",
-                    limit: "8"
+                    limit: "20"
                 },
                 headers: {
                     Authorization: "Bearer " + this.token,

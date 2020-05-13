@@ -33,7 +33,26 @@ class Login extends React.Component {
 
     renderBody() {
         if (this.state.errorMessage) {
-            return <Error message={this.state.errorMessage} />;
+            return (
+                <div>
+                    <Error message={this.state.errorMessage} />
+                    <div className="login">
+
+                        <div className="col-sm-4 ">
+                            <SpotifyLogin
+                                clientId={clientId}
+                                redirectUri={redirectUri}
+                                onRequest={this.Clicked}
+                                onSuccess={this.onSuccess}
+                                onFailure={this.onFailure}
+                                buttonText={"Login"}
+                                className={'btn btn-outline-dark btn-lg login--btn'}
+                            />
+                            <img alt="spotify-logo " className="btn--logo" src={require('../../spotify.png')} />
+                        </div>
+                    </div>
+                </div>
+            );
         }
         if (this.state.isLoading)
             return <Spinner message="Please wait until we log you in" />;
