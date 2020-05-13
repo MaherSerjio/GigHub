@@ -54,6 +54,7 @@ class Artist extends React.Component {
                 }
             })
                 .then((response) => {
+                    this.setState({ errorMessage: null });
                     this.setState({ isLoading: false });
                     this.setState({ artists: response.data.artists.items });
                 })
@@ -66,11 +67,41 @@ class Artist extends React.Component {
     }
 
     renderBody() {
+        let artistsCards;
+
         if (this.token == null) {
             return <Error message="Please Login To your Spotify Account" />
         }
-        if (this.state.errorMessage)
-            return <Error message={this.errorMessage} />
+        if (this.state.errorMessage) {
+            if (this.state.artists) {
+
+                artistsCards = this.state.artists
+                    .map(({ id, name, popularity, images, followers }) =>
+                        <div onClick={() => this.goToArtistAlbums(id, name)} className="col" >
+                            <ArtistCard
+                                popularity={popularity}
+                                images={images}
+                                authorName={name}
+                                numberOfFollowers={followers.total} />
+                        </div>);
+            }
+            return (
+                <div>
+                    <Error message={this.state.errorMessage} />
+                    <div className="artist">
+                        <div className=" d-flex justify-content-center py-5">
+                            <SearchBar onSubmit={this.onSearchSubmit} />
+                        </div>
+                    </div>
+                    <div className="container">
+                        <div className="row">
+                            {artistsCards}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
 
         if (this.state.isLoading)
             return <Spinner message="Fetching your data ..." />;
