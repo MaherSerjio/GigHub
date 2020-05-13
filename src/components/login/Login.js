@@ -1,6 +1,5 @@
 import React from 'react';
 
-import LoginBody from './loginBody';
 import SpotifyLogin from 'react-spotify-login';
 import history from '../../history';
 

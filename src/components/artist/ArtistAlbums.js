@@ -5,7 +5,7 @@ import '../styles/artistDetails.css';
 
 import Spinner from '../Shared/Spinner';
 import Error from '../Shared/Error'
-import AlbumCard from "../Shared/AlbumCard";
+import AlbumCard from "../artist/AlbumCard";
 
 class ArtistAlbums extends React.Component {
     state = { artistAlbums: null, erroMessage: null };

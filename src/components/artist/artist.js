@@ -3,7 +3,7 @@ import axios from 'axios';
 import history from '../../history';
 
 import SearchBar from "../Shared/SearchBar";
-import ArtistCard from "../Shared/ArtistCard";
+import ArtistCard from "../artist/ArtistCard";
 import Spinner from '../Shared/Spinner';
 import Error from '../Shared/Error'
 import '../styles/artist.css';
@@ -72,9 +72,12 @@ class Artist extends React.Component {
         if (this.token == null) {
             return <Error message="Please Login To your Spotify Account" />
         }
+
+        if (this.state.isLoading)
+            return <Spinner message="Fetching your data ..." />;
+
         if (this.state.errorMessage) {
             if (this.state.artists) {
-
                 artistsCards = this.state.artists
                     .map(({ id, name, popularity, images, followers }) =>
                         <div onClick={() => this.goToArtistAlbums(id, name)} className="col" >
@@ -85,6 +88,7 @@ class Artist extends React.Component {
                                 numberOfFollowers={followers.total} />
                         </div>);
             }
+
             return (
                 <div>
                     <Error message={this.state.errorMessage} />
@@ -102,11 +106,8 @@ class Artist extends React.Component {
             );
         }
 
-
-        if (this.state.isLoading)
-            return <Spinner message="Fetching your data ..." />;
-
         if (this.state.artists) {
+
             const artistsCards = this.state.artists
                 .map(({ id, name, popularity, images, followers }) =>
                     <div onClick={() => this.goToArtistAlbums(id, name)} className="col" >
@@ -116,6 +117,7 @@ class Artist extends React.Component {
                             authorName={name}
                             numberOfFollowers={followers.total} />
                     </div>);
+
             return (
                 <div className="artist">
                     <div className=" d-flex justify-content-center py-5">
@@ -129,6 +131,8 @@ class Artist extends React.Component {
                 </div >
             );
         }
+
+
         return (
             <div className="search--bar d-flex justify-content-center align-items-center">
                 <SearchBar onSubmit={this.onSearchSubmit} />
