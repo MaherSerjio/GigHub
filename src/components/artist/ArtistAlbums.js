@@ -16,6 +16,11 @@ class ArtistAlbums extends React.Component {
     artistName = localStorage.getItem("artistName");
 
     // Add Pagination to improve UX 
+    render() {
+        return <div>
+            {this.renderBody()}
+        </div>
+    };
 
     GetArtistAlbums = async () => {
         if (this.token != null) {
@@ -30,16 +35,10 @@ class ArtistAlbums extends React.Component {
                 }
             }).then((response) => { this.setState({ artistAlbums: response.data.items }); })
                 .catch((err) => { this.setState({ erroMessage: err.message }) });
-
         }
     };
 
-    render() {
-        console.log(this.state.artistAlbums);
-        return <div>
-            {this.renderBody()}
-        </div>
-    };
+
 
     renderBody() {
         if (this.state.erroMessage) {

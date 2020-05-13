@@ -2,7 +2,7 @@ import React from "react";
 import { Router, Route } from "react-router-dom";
 import history from '../history';
 
-import Header from './Header';
+import Header from './Shared/Header';
 import Home from './Home';
 import Artist from './artist/Artist';
 import ArtistAlbums from './artist/ArtistAlbums';

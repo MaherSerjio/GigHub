@@ -10,15 +10,8 @@ import '../styles/artist.css';
 
 class Artist extends React.Component {
     state = { artists: null, isLoading: null, errorMessage: null };
-
     token = localStorage.getItem("token");
     term = localStorage.getItem("term");
-
-    goToArtistAlbums = (artistId, artistName) => {
-        localStorage.setItem("artistId", artistId);
-        localStorage.setItem("artistName", artistName);
-        history.push("/artist/" + artistId + "/albums");
-    }
 
     componentDidMount() {
         if (this.token != null && this.term != null && this.state.artists == null)
@@ -26,11 +19,16 @@ class Artist extends React.Component {
     }
 
     render() {
-        // console.log(this.state);
         return <div>
             {this.renderBody()}
         </div>
     };
+
+    goToArtistAlbums = (artistId, artistName) => {
+        localStorage.setItem("artistId", artistId);
+        localStorage.setItem("artistName", artistName);
+        history.push("/artist/" + artistId + "/albums");
+    }
 
     onSearchSubmit = async (term) => {
         localStorage.setItem("term", term);
