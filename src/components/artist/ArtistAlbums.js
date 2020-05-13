@@ -8,7 +8,7 @@ import Error from '../Shared/Error'
 import AlbumCard from "../Shared/AlbumCard";
 
 class ArtistAlbums extends React.Component {
-    state = { artistAlbums: null };
+    state = { artistAlbums: null, erroMessage: null };
     IsDataFetched = false;
 
     token = localStorage.getItem("token");
@@ -19,7 +19,7 @@ class ArtistAlbums extends React.Component {
 
     GetArtistAlbums = async () => {
         if (this.token != null) {
-            const response = await axios.get('https://api.spotify.com/v1/artists/' + this.artistId + '/albums', {
+            await axios.get('https://api.spotify.com/v1/artists/' + this.artistId + '/albums', {
                 params: {
                     offset: "0",
                     limit: "20"
@@ -28,8 +28,9 @@ class ArtistAlbums extends React.Component {
                     Authorization: "Bearer " + this.token,
                     Accept: "application/json"
                 }
-            });
-            this.setState({ artistAlbums: response.data.items });
+            }).then((response) => { this.setState({ artistAlbums: response.data.items }); })
+                .catch((err) => { this.setState({ erroMessage: err.message }) });
+
         }
     };
 
