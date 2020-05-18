@@ -1,17 +1,31 @@
 import React from "react";
 import axios from 'axios';
 
+import Pagination from "react-pagination-js";
+import "react-pagination-js/dist/styles.css"; // import css
+
 import Spinner from '../Shared/Spinner';
 import Error from '../Shared/Error'
 import AlbumCard from "../artist/AlbumCard";
 
 class ArtistAlbums extends React.Component {
-    state = { artistAlbums: null, erroMessage: null };
+    state = {
+        artistAlbums: null, erroMessage: null,
+        currentPage: 1,
+        totalArtistAlbums: null
+    };
     IsDataFetched = false;
 
     token = localStorage.getItem("token");
     artistId = localStorage.getItem("artistId");
     artistName = localStorage.getItem("artistName");
+
+    changeCurrentPage = numPage => {
+        this.setState({ currentPage: numPage });
+        //fetch a data
+        this.GetArtistAlbums(numPage - 1);
+        //or update a query to get data
+    };
 
     // Add Pagination to improve UX 
     render() {
@@ -20,11 +34,11 @@ class ArtistAlbums extends React.Component {
         </div>
     };
 
-    GetArtistAlbums = async () => {
+    GetArtistAlbums = async (offset) => {
         if (this.token != null) {
             await axios.get('https://api.spotify.com/v1/artists/' + this.artistId + '/albums', {
                 params: {
-                    offset: "0",
+                    offset: offset,
                     limit: "20"
                 },
                 headers: {
@@ -32,7 +46,13 @@ class ArtistAlbums extends React.Component {
                     Accept: "application/json"
                 }
             })
-                .then((response) => { this.setState({ artistAlbums: response.data.items }); })
+                .then((response) => {
+                    console.log('response', response);
+                    this.setState({
+                        artistAlbums: response.data.items,
+                        totalArtistAlbums: response.data.total
+                    });
+                })
                 .catch((err) => { this.setState({ erroMessage: err.message }) });
         }
     };
@@ -75,6 +95,17 @@ class ArtistAlbums extends React.Component {
                     <div className="container">
                         <div className="row ">
                             {artistAlbums}
+                        </div>
+                        <div className="row justify-content-center">
+                            <div className="row justify-content-center pb-5">
+                                <Pagination
+                                    totalSize={this.state.totalArtistAlbums}
+                                    theme="bootstrap"
+                                    currentPage={this.state.currentPage}
+                                    totalPages={10}
+                                    changeCurrentPage={this.changeCurrentPage}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
