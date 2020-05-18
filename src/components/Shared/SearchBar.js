@@ -2,6 +2,11 @@ import React from 'react';
 
 class SearchBar extends React.Component {
     state = { term: '' };
+    term = localStorage.getItem('term');
+
+    componentDidMount() {
+        this.setState({ term: this.term });
+    }
 
     onFormSubmit = (e) => {
         e.preventDefault();

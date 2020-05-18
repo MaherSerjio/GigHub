@@ -20,7 +20,7 @@ const AlbumCard = (props) => {
                 </span>
                 </p>
                 <div className="card-footer text-center">
-                    <a href={previewUrl} target="_blank" className="text-white">Preview on Spotify</a>
+                    <a href={previewUrl} rel="noopener noreferrer" target="_blank" className="text-white">Preview on Spotify</a>
                 </div>
             </div>
         </div>

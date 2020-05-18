@@ -40,7 +40,7 @@ class Artist extends React.Component {
 
         if (this.token != null) {
             this.setState({ isLoading: true });
-            const response = await axios.get("https://api.spotify.com/v1/search", {
+            await axios.get("https://api.spotify.com/v1/search", {
                 params: {
                     query: term,
                     type: "artist",
@@ -57,6 +57,7 @@ class Artist extends React.Component {
                     this.setState({ errorMessage: null });
                     this.setState({ isLoading: false });
                     this.setState({ artists: response.data.artists.items });
+
                 })
                 .catch((err) => {
                     this.setState({ isLoading: false });

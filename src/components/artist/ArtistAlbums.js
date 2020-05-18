@@ -22,7 +22,7 @@ class ArtistAlbums extends React.Component {
 
     GetArtistAlbums = async () => {
         if (this.token != null) {
-            const response = await axios.get('https://api.spotify.com/v1/artists/' + this.artistId + '/albums', {
+            await axios.get('https://api.spotify.com/v1/artists/' + this.artistId + '/albums', {
                 params: {
                     offset: "0",
                     limit: "20"
