@@ -1,15 +1,19 @@
 import React from 'react';
-
-import SpotifyLogin from 'react-spotify-login';
 import history from '../configuration/history';
-
 import { clientId, redirectUri } from '../configuration/settings';
+import SpotifyLogin from 'react-spotify-login';
 import Spinner from '../Shared/Spinner';
 import Error from '../Shared/Error'
 import '../styles/login.css';
 
+
+
 class Login extends React.Component {
     state = { errorMessage: null, isLoading: null };
+
+    componentDidMount() {
+        localStorage.removeItem('term');
+    }
 
     Clicked = () => this.setState({ isLoading: true });
 

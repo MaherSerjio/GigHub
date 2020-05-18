@@ -1,8 +1,6 @@
 import React from "react";
 import axios from 'axios';
 
-import '../styles/artistDetails.css';
-
 import Spinner from '../Shared/Spinner';
 import Error from '../Shared/Error'
 import AlbumCard from "../artist/AlbumCard";
