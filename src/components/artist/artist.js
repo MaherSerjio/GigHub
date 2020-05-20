@@ -23,6 +23,8 @@ class Artist extends React.Component {
     changeCurrentPage = numPage => {
         this.setState({ currentPage: numPage });
         //fetch a data
+        this.term = localStorage.getItem("term");
+        console.log(this.term, 'term here');
         this.GetSearchResult(this.term, numPage - 1);
         //or update a query to get data
     };
